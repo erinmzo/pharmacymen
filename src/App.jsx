@@ -1,9 +1,11 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
+import router from "./routes/router";
 
 function App() {
 	return (
 		<>
-			<div>약국 어디 가멘</div>
+			<RouterProvider router={router} />
 		</>
 	);
 }
