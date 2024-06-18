@@ -1,9 +1,20 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchReviews } from "../../api/comment";
+import React, { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getReviews, addReview } from "../../api/Review";
 
 function Review() {
-	const { data: reviews, isLoading, error } = useQuery({ queryKey: ["reviews"], queryFn: fetchReviews });
+	const [nickname, setNickname] = useState("");
+	const [comment, setComment] = useState("");
+	const queryClient = useQueryClient();
+
+	const { data: reviews, isLoading, error } = useQuery({ queryKey: ["reviews"], queryFn: getReviews });
+
+	const mutation = useMutation({
+		mutationFn: addReview,
+		onSuccess: () => {
+			queryClient.invalidateQueries(["reviews"]);
+		}
+	});
 
 	if (isLoading) return <>Loading...</>;
 
@@ -11,15 +22,27 @@ function Review() {
 		return <div>에러가 발생했습니다: {error.message}</div>;
 	}
 
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		mutation.mutate({ nickname, comment });
+		setNickname("");
+		setComment("");
+	};
+
 	return (
 		<div className="flex flex-col items-center">
 			<div className="w-[670px]">
 				<h2 className="text-xl font-bold text-[24px] mb-5">⭐️ 약국 후기를 남겨주세요!</h2>
-				<form className="flex flex-col mb-5 border-b-2 border-green-400 pb-5">
+				<form onSubmit={submitHandler} className="flex flex-col mb-5 border-b-2 border-green-400 pb-5">
 					<div className="flex flex-row w-full">
 						<div className="flex flex-col mr-2.5">
 							<label className="block uppercase tracking-wide text-gray-700 text-[16px] font-bold mb-1.5">닉네임</label>
-							<input className="border-2 border-green-400 rounded-[7px] w-[148px] h-[42px] px-4" placeholder="닉네임" />
+							<input
+								className="border-2 border-green-400 rounded-[7px] w-[148px] h-[42px] px-4"
+								placeholder="닉네임"
+								value={nickname}
+								onChange={(e) => setNickname(e.target.value)}
+							/>
 						</div>
 						<div className="flex flex-col mr-2.5">
 							<label className="block uppercase tracking-wide text-gray-700 text-[16px] font-bold mb-1.5">
@@ -28,6 +51,8 @@ function Review() {
 							<input
 								className="border-2 border-green-400 rounded-[7px] w-[417px] h-[42px] px-4"
 								placeholder="내용을 입력하세요"
+								value={comment}
+								onChange={(e) => setComment(e.target.value)}
 							/>
 						</div>
 						<div className="flex items-end">
