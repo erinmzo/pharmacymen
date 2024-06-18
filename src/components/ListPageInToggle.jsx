@@ -1,76 +1,83 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import supabase from "../supabase/supabase";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import fetchMenuItems from "../api/pharmacy";
+import iconClose from "../../public/img/icon_close.png";
+import iconOpen from "../../public/img/icon_open.png";
+import backIcon from "../../public/img/icon_back.png";
 
 function ListPageInToggle() {
 	const [isToggled, setIsToggled] = useState(true);
-	const [menuItems, setMenuItems] = useState([]);
 	const location = useLocation();
+	const navigate = useNavigate();
 
-	useEffect(() => {
-		fetchMenuItems();
-	}, [location.pathname]);
+	const lastFourDigits = location.pathname.slice(-4);
 
-	const fetchMenuItems = async () => {
-		try {
-			// URL 경로에서 마지막 4자리 숫자 추출
-			const lastFourDigits = location.pathname.substr(-4);
-
-			// place-code가 일치하는 데이터를 가져오는 쿼리
-			const { data, error } = await supabase
-				.from("pharmacy")
-				.select("id, place-name, address, phone-number")
-				.eq("place-code", Number(lastFourDigits));
-
-			if (error) {
-				throw error;
-			} else {
-				setMenuItems(data);
-			}
-		} catch (error) {
-			console.error("메뉴 항목을 가져오는 중 오류 발생:", error.message);
-		}
-	};
+	const {
+		data: menuItems,
+		error,
+		isLoading
+	} = useQuery({
+		queryKey: ["menuItems", lastFourDigits],
+		queryFn: () => fetchMenuItems(lastFourDigits),
+		enabled: !!lastFourDigits
+	});
 
 	const handleToggle = () => {
 		setIsToggled(!isToggled);
 	};
 
+	const handleBack = () => {
+		navigate(-1);
+	};
+
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return <div>Error: {error.message}</div>;
+	}
+
 	return (
-		<div
-			className={`fixed right-0 top-0 z-[100] h-full max-w-lg flex ${
-				isToggled ? "translate-x-0" : "translate-x-[calc(100%-3rem)]"
-			} transition-transform duration-1000 delay-200`}
-		>
-			<div className="flex items-center">
-				<button
-					onClick={handleToggle}
-					className=" bg-green-400 text-white w-12 h-12 rounded-l-full flex items-center justify-center"
-				>
-					<i className="text-2xl">{isToggled ? ">" : "<"}</i>
-				</button>
+		<>
+			<div
+				className={`fixed left-0 top-0 z-[100] h-full max-w-lg flex ${
+					isToggled ? "translate-x-0" : "-translate-x-full"
+				} transition-transform duration-1000 delay-200`}
+			>
+				<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50">
+					<div className="w-full px-4 py-4 bg-green-400 text-white flex items-center">
+						<button onClick={handleBack} className="mr-2">
+							<img src={backIcon} alt="Back Icon" className="w-6 h-6" />
+						</button>
+					</div>
+					<nav className={`mt-4 ${isToggled ? "block" : "hidden"}`}>
+						<ul className="">
+							{menuItems.map((item, index) => (
+								<li key={index}>
+									<Link to={`/list/detail/${item.id}`}>
+										<div className="block px-4 py-4 bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+											<div className="font-bold">{item["place-name"]}</div>
+											<div>{item.address}</div>
+											<div>{item["phone-number"]}</div>
+										</div>
+									</Link>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</div>
+				<div className="absolute right-[-48px] top-0 z-[101] h-full flex items-center">
+					<button
+						onClick={handleToggle}
+						className="bg-green-400 text-white w-12 h-12 rounded-r-full flex items-center justify-center"
+					>
+						<img src={isToggled ? iconClose : iconOpen} alt="Toggle Icon" className="w-6 h-6" />
+					</button>
+				</div>
 			</div>
-			<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50">
-				<button onClick={handleToggle} className="w-full px-4 py-4 bg-green-400 text-white">
-					{isToggled ? "메뉴 숨기기" : "메뉴 보이기"}
-				</button>
-				<nav className={`mt-4 ${isToggled ? "block" : "hidden"}`}>
-					<ul className="">
-						{menuItems.map((item, index) => (
-							<li key={index}>
-								<Link to={`/list/detail/${item.id}`}>
-									<div className="block px-4 py-4 bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
-										<div className="font-bold">{item["place-name"]}</div>
-										<div>{item.address}</div>
-										<div>{item["phone-number"]}</div>
-									</div>
-								</Link>
-							</li>
-						))}
-					</ul>
-				</nav>
-			</div>
-		</div>
+		</>
 	);
 }
 
