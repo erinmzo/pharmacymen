@@ -1,6 +1,6 @@
 import supabase from "../supabase/supabase";
 
-const fetchMenuItems = async (lastFourDigits) => {
+export const fetchMenuItems = async (lastFourDigits) => {
 	try {
 		const { data, error } = await supabase
 			.from("pharmacy")
@@ -17,5 +17,3 @@ const fetchMenuItems = async (lastFourDigits) => {
 		throw new Error("Failed to fetch menu items");
 	}
 };
-
-export default fetchMenuItems;

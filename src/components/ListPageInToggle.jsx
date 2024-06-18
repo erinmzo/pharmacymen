@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import fetchMenuItems from "../api/pharmacy";
+import { fetchMenuItems } from "../api/pharmacy";
 import iconClose from "../../public/img/icon_close.png";
 import iconOpen from "../../public/img/icon_open.png";
 import backIcon from "../../public/img/icon_back.png";
@@ -19,8 +19,7 @@ function ListPageInToggle() {
 		isLoading
 	} = useQuery({
 		queryKey: ["menuItems", lastFourDigits],
-		queryFn: () => fetchMenuItems(lastFourDigits),
-		enabled: !!lastFourDigits
+		queryFn: () => fetchMenuItems(lastFourDigits)
 	});
 
 	const handleToggle = () => {
