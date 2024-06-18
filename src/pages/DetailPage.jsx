@@ -5,7 +5,6 @@ function DetailPage() {
 	return (
 		<>
 			<div>DetailPage</div>
-
 			<Review />
 		</>
 	);

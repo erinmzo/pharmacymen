@@ -18,11 +18,6 @@ function Review() {
 			date: "2024/06/11",
 			nickname: "조민수",
 			content: "이 약국 저녁에도 해서 너무 좋아요!"
-		},
-		{
-			date: "2024/06/11",
-			nickname: "조민수",
-			content: "이 약국 저녁에도 해서 너무 좋아요!"
 		}
 	];
 
