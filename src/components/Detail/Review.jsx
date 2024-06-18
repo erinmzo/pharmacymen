@@ -1,25 +1,15 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchReviews } from "../../api/comment";
 
 function Review() {
-	const reviews = [
-		{
-			date: "2024/06/11",
-			nickname: "조민수",
-			content:
-				"이 약국 저녁에도 해서 너무 좋아요!이 약국 저녁에도 해서 너무 좋아요!이 약국 저녁에도 해서 너무 좋아요!이 약국 저녁에도 해서 너무 좋아요!"
-		},
-		{
-			date: "2024/06/11",
-			nickname: "이성찬",
-			content:
-				"약국이 정말 좋아요!약국이 정말 좋아요!약국이 정말 좋아요!약국이 정말 좋아요!약국이 정말 좋아요!약국이 정말 좋아요!약국이 정말 좋아요!약국이 정말 좋아요!"
-		},
-		{
-			date: "2024/06/11",
-			nickname: "조민수",
-			content: "이 약국 저녁에도 해서 너무 좋아요!"
-		}
-	];
+	const { data: reviews, isLoading, error } = useQuery({ queryKey: ["reviews"], queryFn: fetchReviews });
+
+	if (isLoading) return <>Loading...</>;
+
+	if (error) {
+		return <div>에러가 발생했습니다: {error.message}</div>;
+	}
 
 	return (
 		<div className="flex flex-col items-center">
@@ -47,14 +37,14 @@ function Review() {
 				</form>
 
 				<ul className="space-y-4">
-					{reviews.map((review, index) => (
+					{reviews?.map((review, index) => (
 						<li key={index} className="flex flex-col border-b border-gray-200 pb-4">
 							<section className="flex flex-row items-center">
 								<header className="mr-20">
-									<div className="text-[14px] text-gray-400 mb-[5px]">{review.date}</div>
-									<div className="text-[18px] text-gray-700">{review.nickname}</div>
+									<div className="text-[14px] text-gray-400 mb-[5px]">{review.created_at}</div>
+									<div className="text-[18px] text-gray-700">{review.nick_name}</div>
 								</header>
-								<p className="text-[18px] text-gray-700 truncate">{review.content}</p>
+								<p className="text-[18px] text-gray-700 truncate">{review.comment}</p>
 							</section>
 						</li>
 					))}
