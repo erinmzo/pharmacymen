@@ -1,5 +1,11 @@
+import ListPageMap from "../components/List/ListPageMap";
+
 function ListPage() {
-	return <div>ListPage</div>;
+	return (
+		<>
+			<ListPageMap />
+		</>
+	);
 }
 
 export default ListPage;
