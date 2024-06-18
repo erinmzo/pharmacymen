@@ -46,20 +46,27 @@ function ListPageInToggle() {
 				} transition-transform duration-1000 delay-200`}
 			>
 				<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50">
-					<div className="w-full px-4 py-4 bg-green-400 text-white flex items-center">
+					<div className="w-full px-4 py-7 bg-green-400 text-white flex items-center">
 						<button onClick={handleBack} className="mr-2">
-							<img src={backIcon} alt="Back Icon" className="w-6 h-6" />
+							<img src={backIcon} alt="Back Icon" />
 						</button>
 					</div>
 					<nav className={`mt-4 ${isToggled ? "block" : "hidden"}`}>
 						<ul className="">
+							<div className="px-4 py-2">
+								<p className="text-[34px] font-bold text-green-400 inline-block">
+									{menuItems.length > 0 && menuItems[0]["place-area"].slice(0, 2)}
+								</p>
+								<p className="text-[18px] inline-block px-2">총 검색 결과는 {menuItems.length}개 입니다.</p>
+							</div>
+
 							{menuItems.map((item, index) => (
 								<li key={index}>
 									<Link to={`/list/detail/${item.id}`}>
-										<div className="block px-4 py-4 bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
-											<div className="font-bold">{item["place-name"]}</div>
-											<div>{item.address}</div>
-											<div>{item["phone-number"]}</div>
+										<div className="block px-4 py-6 bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+											<div className="text-[28px] font-bold ">{item["place-name"]}</div>
+											<div className="text-[18px]">{item.address}</div>
+											<div className="text-[18px]">{item["phone-number"]}</div>
 										</div>
 									</Link>
 								</li>
@@ -72,7 +79,7 @@ function ListPageInToggle() {
 						onClick={handleToggle}
 						className="bg-green-400 text-white w-12 h-12 rounded-r-full flex items-center justify-center"
 					>
-						<img src={isToggled ? iconClose : iconOpen} alt="Toggle Icon" className="w-6 h-6" />
+						<img src={isToggled ? iconClose : iconOpen} alt="Toggle Icon" />
 					</button>
 				</div>
 			</div>
