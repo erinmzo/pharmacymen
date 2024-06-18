@@ -4,7 +4,7 @@ export const fetchMenuItems = async (lastFourDigits) => {
 	try {
 		const { data, error } = await supabase
 			.from("pharmacy")
-			.select("id, place-name, address, phone-number, place-area")
+			.select("id, place-name, address, phone-number, place-area, lat, lon")
 			.eq("place-code", Number(lastFourDigits));
 
 		if (error) {
