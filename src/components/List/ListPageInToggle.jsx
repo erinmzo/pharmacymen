@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fetchMenuItems } from "../../api/pharmacy";
-import backIcon from "/public/img/icon_back.png";
-import iconClose from "/public/img/icon_close.png";
-import iconOpen from "/public/img/icon_open.png";
+import backIcon from "/img/icon_back.png";
+import iconClose from "/img/icon_close.png";
+import iconOpen from "/img/icon_open.png";
 
 function ListPageInToggle() {
 	const [isToggled, setIsToggled] = useState(true);
