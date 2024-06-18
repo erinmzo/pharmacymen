@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { getReviews, addReview } from "../../api/Review";
 
 function Review() {
+	const { detailId } = useParams();
 	const [nickname, setNickname] = useState("");
 	const [comment, setComment] = useState("");
 	const queryClient = useQueryClient();
 
-	const { data: reviews, isLoading, error } = useQuery({ queryKey: ["reviews"], queryFn: getReviews });
+	const {
+		data: reviews,
+		isLoading,
+		error
+	} = useQuery({
+		queryKey: ["reviews", detailId],
+		queryFn: () => getReviews(detailId)
+	});
 
 	const mutation = useMutation({
 		mutationFn: addReview,
 		onSuccess: () => {
-			queryClient.invalidateQueries(["reviews"]);
+			queryClient.invalidateQueries(["reviews", detailId]);
 		}
 	});
 
@@ -24,7 +33,7 @@ function Review() {
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		mutation.mutate({ nickname, comment });
+		mutation.mutate({ nickname, comment, pharmacy_id: detailId });
 		setNickname("");
 		setComment("");
 	};
@@ -63,14 +72,14 @@ function Review() {
 
 				<ul className="space-y-4">
 					{reviews?.map((review, index) => (
-						<li key={index} className="flex flex-col border-b border-gray-200 pb-4">
-							<section className="flex flex-row items-center">
-								<header className="mr-20">
-									<div className="text-[14px] text-gray-400 mb-[5px]">{review.created_at}</div>
-									<div className="text-[18px] text-gray-700">{review.nick_name}</div>
-								</header>
-								<p className="text-[18px] text-gray-700 truncate">{review.comment}</p>
-							</section>
+						<li key={index} className="border-b border-gray-200 pb-2">
+							<div className="flex flex-col -translate-y-3">
+								<div className="text-[14px] text-gray-400 ">{review.created_at}</div>
+								<div className="flex flex-row items-center">
+									<div className="text-[18px] text-gray-700 w-[100px] mr-20 truncate">{review.nick_name}</div>
+									<p className="text-[18px] text-gray-700 truncate">{review.comment}</p>
+								</div>
+							</div>
 						</li>
 					))}
 				</ul>
