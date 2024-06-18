@@ -1,4 +1,4 @@
-import ListPageInToggle from "../components/ListPageInToggle";
+import ListPageInToggle from "../components/List/ListPageInToggle";
 import ListPageMap from "../components/List/ListPageMap";
 
 function ListPage() {
