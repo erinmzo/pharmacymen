@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
@@ -7,6 +7,7 @@ import iconOpen from "/img/icon_open.png";
 function ListPageInToggle({ menuItems, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
 	const navigate = useNavigate();
+	const refs = useRef([]);
 
 	const handleToggle = () => {
 		setIsToggled(!isToggled);
@@ -15,6 +16,12 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 	const handleBack = () => {
 		navigate(-1);
 	};
+
+	useEffect(() => {
+		if (selectedMarkerId && refs.current[selectedMarkerId]) {
+			refs.current[selectedMarkerId].scrollIntoView({ behavior: "smooth", block: "center" });
+		}
+	}, [selectedMarkerId]);
 
 	return (
 		<>
@@ -42,7 +49,8 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 								<li key={index} className="px-4">
 									<Link to={`/list/detail/${item.id}`}>
 										<div
-											className={`block py-6 border-b-2 border-gray-200 ${
+											ref={(el) => (refs.current[item.id] = el)}
+											className={`block px-4 py-6 border-b-2 border-gray-200 ${
 												selectedMarkerId === item.id
 													? "bg-yellow-100 hover:bg-yellow-200"
 													: "bg-gray-50 hover:bg-gray-100"

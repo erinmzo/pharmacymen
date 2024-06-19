@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
@@ -13,6 +14,20 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 		setSelectedMarkerId(id);
 	};
 
+	const [myLocation, setMyLocation] = useState(null);
+	useEffect(() => {
+		navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+	}, []);
+
+	const handleSuccess = (response) => {
+		const { latitude, longitude } = response.coords;
+		setMyLocation({ latitude, longitude });
+	};
+
+	const handleError = (error) => {
+		console.log(error);
+	};
+
 	return (
 		<div>
 			<Map
@@ -23,6 +38,13 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 				}}
 				level={7}
 			>
+				{myLocation && (
+					<MapMarker
+						position={{ lat: myLocation.latitude, lng: myLocation.longitude }}
+						image={{ src: "/img/icon-marker-mylocation.png", size: { width: 70, height: 70 }, title: "현재 위치" }}
+						title="현재 위치"
+					/>
+				)}
 				{locations.map((location) => (
 					<MapMarker
 						onClick={() => handleSelectMarkerId(location.id)}
@@ -33,7 +55,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 							size: { width: 70, height: 70 }
 						}}
 						placeName={location.placeName}
-					/>
+					></MapMarker>
 				))}
 			</Map>
 		</div>

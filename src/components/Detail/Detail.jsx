@@ -2,20 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useParams } from "react-router-dom";
 import { fetchItem } from "../../api/pharmacy";
+import Loading from "../Loading/Loading";
 
 export default function Detail() {
 	const { detailId } = useParams();
 
 	const {
 		data: pharmacy,
-		isLoading,
+		isPending,
 		error
 	} = useQuery({
 		queryKey: ["pharmacy", detailId],
 		queryFn: () => fetchItem(detailId)
 	});
 
-	if (isLoading) return <p>Loading...</p>;
+	if (isPending) return <Loading />;
 	if (error) return <p>Error fetching pharmacy</p>;
 
 	return (

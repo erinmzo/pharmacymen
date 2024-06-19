@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { fetchMenuItems } from "../api/pharmacy";
 import ListPageInToggle from "../components/List/ListPageInToggle";
 import ListPageMap from "../components/List/ListPageMap";
+import Loading from "../components/Loading/Loading";
 
 function ListPage() {
 	const location = useLocation();
@@ -19,13 +20,9 @@ function ListPage() {
 		queryFn: () => fetchMenuItems(lastFourDigits)
 	});
 
-	if (isPending) {
-		return <div>Loading...</div>;
-	}
+	if (isPending) return <Loading />;
 
-	if (error) {
-		return <div>Error: {error.message}</div>;
-	}
+	if (error) return <div>Error fetching pharmacies</div>;
 
 	return (
 		<>
