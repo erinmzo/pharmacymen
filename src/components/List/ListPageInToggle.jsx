@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
+import "./ListPageStyle.css";
 
 function ListPageInToggle({ menuItems, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
@@ -38,7 +39,7 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 					</div>
 					<nav className="mt-4">
 						<ul>
-							<div className="px-4 py-2 flex items-center h-full">
+							<div className="px-8 py-2 flex items-center h-full">
 								<p className="text-[34px] font-bold text-green-400 inline-block">
 									{menuItems.length > 0 && menuItems[0]["place-area"].slice(0, -1)}
 								</p>
