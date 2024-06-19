@@ -23,12 +23,14 @@ export const fetchItem = async ({ queryKey }) => {
 		const { data, error } = await supabase
 			.from("pharmacy")
 			.select("id, place-name, address, phone-number, place-area, lat, lon")
-			.eq("id", queryKey[1]);
+			.eq("id", queryKey[1])
+			.single();
 
 		if (error) {
 			throw new Error(error.message);
 		}
 
+		console.log(data);
 		return data;
 	} catch (error) {
 		console.error("Error fetching item:", error.message);
