@@ -26,7 +26,13 @@ export default function Detail() {
 					style={{ width: "100%", height: "400px", marginBottom: "30px" }}
 					level={3}
 				>
-					<MapMarker position={{ lat: pharmacy.lat, lng: pharmacy.lon }} />
+					<MapMarker
+						position={{ lat: pharmacy.lat, lng: pharmacy.lon }}
+						image={{
+							src: "/img/icon-marker.png",
+							size: { width: 70, height: 70 }
+						}}
+					/>
 				</Map>
 				<div>
 					<p className="text-2xl font-black text-[24px] mb-5">{pharmacy["place-name"]}</p>
