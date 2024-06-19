@@ -26,7 +26,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 				{locations.map((location) => (
 					<MapMarker
 						onClick={() => handleSelectMarkerId(location.id)}
-						key={`${location.placeName}-${location.latlng.lat}-${location.latlng.lng}`}
+						key={`${location.placeName}-${location.latlng}`}
 						position={location.latlng}
 						image={{
 							src: selectedMarkerId === location.id ? "/img/icon-marker-selected.png" : "/img/icon-marker.png",
