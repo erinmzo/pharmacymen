@@ -23,7 +23,7 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 					isToggled ? "translate-x-0" : "-translate-x-full"
 				} transition-transform duration-1000 delay-200`}
 			>
-				<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50">
+				<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50 ">
 					<div className="w-full px-4 py-7 bg-green-400 text-white flex items-center">
 						<button onClick={handleBack} className="mr-2">
 							<img src={backIcon} alt="Back Icon" />
