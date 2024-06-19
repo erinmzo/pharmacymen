@@ -17,7 +17,6 @@ function LoginForm() {
 		};
 		const data = await loginUser(userInfo);
 		if (data) {
-			saveUserInfo(data);
 			navigate("/");
 		} else {
 			alert("로그인에 실패했습니다.");

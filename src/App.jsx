@@ -20,6 +20,7 @@ function App() {
 			} else {
 				saveUserInfo(null);
 			}
+			console.log(session.user);
 		});
 		return () => subscription.unsubscribe();
 	}, []);

@@ -1,14 +1,16 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { logOut } from "../../api/auth";
 import useAuthStore from "../../zustand/auth";
 
 function HeaderLogin() {
+	const navigate = useNavigate();
 	const { detailId } = useParams();
 	const saveUserInfo = useAuthStore((state) => state.saveUserInfo);
 	const userInfo = useAuthStore((state) => state.userInfo);
 	const handleLogout = async () => {
 		saveUserInfo(null);
 		await logOut();
+		navigate("/");
 	};
 
 	return (
