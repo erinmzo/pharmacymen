@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
+import useGeoLocation from "./GeoLocation.js";
 
 function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 	const centerLatLon = { lat: Number(pharmacies[0].lat), lng: Number(pharmacies[0].lon - 0.06) };
+	const myLocation = useGeoLocation();
 
 	const locations = pharmacies.map((pharmacy) => ({
 		id: pharmacy.id,
@@ -12,20 +13,6 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 
 	const handleSelectMarkerId = (id) => {
 		setSelectedMarkerId(id);
-	};
-
-	const [myLocation, setMyLocation] = useState(null);
-	useEffect(() => {
-		navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
-	}, []);
-
-	const handleSuccess = (response) => {
-		const { latitude, longitude } = response.coords;
-		setMyLocation({ latitude, longitude });
-	};
-
-	const handleError = (error) => {
-		console.log(error);
 	};
 
 	return (
