@@ -1,5 +1,5 @@
-import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useQuery } from "@tanstack/react-query";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useParams } from "react-router-dom";
 import { fetchItem } from "../../api/pharmacy";
 
@@ -19,7 +19,7 @@ export default function Detail() {
 	if (error) return <p>Error fetching pharmacy</p>;
 
 	return (
-		<div className="flex flex-col items-center mb-5">
+		<div className="flex flex-col items-center mb-5 mt-[50px]">
 			<div className="w-[670px]">
 				<Map
 					center={{ lat: pharmacy.lat, lng: pharmacy.lon }}
