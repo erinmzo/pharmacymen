@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviews, addReview, updateReview, deleteReview } from "../../api/Review";
 import useAuthStore from "../../zustand/Auth";
-
 function Review() {
 	const { detailId } = useParams();
 	const [comment, setComment] = useState("");

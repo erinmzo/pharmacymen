@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { fetchMenuItems } from "../api/pharmacy";
-import ListPageInToggle from "../components/List/ListPageInToggle";
+
 import ListPageMap from "../components/List/ListPageMap";
+import ListPageToggle from "../components/List/ListPageToggle";
 import Loading from "../components/Loading/Loading";
 
 function ListPage() {
@@ -26,7 +27,7 @@ function ListPage() {
 
 	return (
 		<>
-			<ListPageInToggle menuItems={menuItems} selectedMarkerId={selectedMarkerId} />
+			<ListPageToggle menuItems={menuItems} selectedMarkerId={selectedMarkerId} />
 			<ListPageMap
 				pharmacies={menuItems}
 				selectedMarkerId={selectedMarkerId}
