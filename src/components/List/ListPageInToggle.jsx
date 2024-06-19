@@ -4,7 +4,7 @@ import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
 
-function ListPageInToggle({ menuItems }) {
+function ListPageInToggle({ menuItems, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
 	const navigate = useNavigate();
 
@@ -41,7 +41,13 @@ function ListPageInToggle({ menuItems }) {
 							{menuItems.map((item, index) => (
 								<li key={index}>
 									<Link to={`/list/detail/${item.id}`}>
-										<div className="block px-4 py-6 bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
+										<div
+											className={`block px-4 py-6 border-b border-gray-200 ${
+												selectedMarkerId === item.id
+													? "bg-yellow-100 hover:bg-yellow-200"
+													: "bg-gray-50 hover:bg-gray-100"
+											}`}
+										>
 											<div className="text-[28px] font-bold ">{item["place-name"]}</div>
 											<div className="text-[18px]">{item.address}</div>
 											<div className="text-[18px]">{item["phone-number"]}</div>
