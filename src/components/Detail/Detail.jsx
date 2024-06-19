@@ -50,7 +50,7 @@ export default function Detail() {
                 <p className="absolute right-[5px] bottom-[5px] cursor-pointer underline hover:decoration-2">
                   <a href={`https://map.kakao.com/link/search/${pharmacy["address"]}`}>카카오맵으로 이동하기&gt;&gt;</a>
                 </p>
-                <p className="font-bold">{pharmacy["place-name"]}</p>
+                <p className="text-sky-600 font-bold">{pharmacy["place-name"]}</p>
                 <p className="text-gray-700 font-medium">{pharmacy["address"]}</p>
               </div>
             )}
