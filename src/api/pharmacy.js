@@ -1,17 +1,17 @@
 import supabase from "../supabase/supabase";
 
-export const fetchAllMenuItems = async () => {
-	try {
-		const { data, error } = await supabase.from("pharmacy").select("*");
-		if (error) {
-			alert(error.message);
-		}
+// export const fetchAllMenuItems = async () => {
+// 	try {
+// 		const { data, error } = await supabase.from("pharmacy").select("*");
+// 		if (error) {
+// 			alert(error.message);
+// 		}
 
-		return data;
-	} catch (error) {
-		alert(error.message);
-	}
-};
+// 		return data;
+// 	} catch (error) {
+// 		alert(error.message);
+// 	}
+// };
 
 export const fetchMenuItems = async (lastFourDigits) => {
 	try {
