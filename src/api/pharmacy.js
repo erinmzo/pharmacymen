@@ -29,6 +29,7 @@ export const fetchItem = async ({ queryKey }) => {
 			throw new Error(error.message);
 		}
 
+		console.log(data);
 		return data;
 	} catch (error) {
 		console.error("Error fetching item:", error.message);
