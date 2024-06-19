@@ -1,4 +1,4 @@
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import useGeoLocation from "./GeoLocation.js";
 
 function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
@@ -23,7 +23,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 					width: "100%",
 					height: "100vh"
 				}}
-				level={7}
+				level={5}
 			>
 				{myLocation && (
 					<MapMarker
@@ -32,18 +32,23 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 						title="현재 위치"
 					/>
 				)}
-				{locations.map((location) => (
-					<MapMarker
-						onClick={() => handleSelectMarkerId(location.id)}
-						key={`${location.placeName}-${location.latlng}`}
-						position={location.latlng}
-						image={{
-							src: selectedMarkerId === location.id ? "/img/icon-marker-selected.png" : "/img/icon-marker.png",
-							size: { width: 70, height: 70 }
-						}}
-						placeName={location.placeName}
-					></MapMarker>
-				))}
+				<MarkerClusterer
+					averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+					minLevel={7} // 클러스터 할 최소 지도 레벨
+				>
+					{locations.map((location) => (
+						<MapMarker
+							onClick={() => handleSelectMarkerId(location.id)}
+							key={`${location.placeName}-${location.latlng}`}
+							position={location.latlng}
+							image={{
+								src: selectedMarkerId === location.id ? "/img/icon-marker-selected.png" : "/img/icon-marker.png",
+								size: { width: 70, height: 70 }
+							}}
+							placeName={location.placeName}
+						></MapMarker>
+					))}
+				</MarkerClusterer>
 			</Map>
 		</div>
 	);
