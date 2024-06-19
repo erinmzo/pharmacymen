@@ -56,7 +56,7 @@ function Review() {
 			return;
 		}
 		const email = userInfo?.user?.email;
-		const nickname = email.split("@")[0];
+		const nickname = email?.split("@")[0];
 		addMutation.mutate({ nickname, comment, pharmacy_id: detailId });
 		setComment("");
 	};
