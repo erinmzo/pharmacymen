@@ -59,3 +59,14 @@ export const deleteReview = async ({ id }) => {
 
 	return data;
 };
+
+// 리스트에 리뷰개수를 위한
+export const fetchReviewCount = async (pharmacyId) => {
+	const { count, error } = await supabase.from("review").select("id", { count: "exact" }).eq("pharmacy_id", pharmacyId);
+
+	if (error) {
+		throw new Error("Error fetching review count: " + error.message);
+	}
+
+	return count;
+};
