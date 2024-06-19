@@ -29,11 +29,7 @@ function ListPage() {
 
 	return (
 		<>
-			<ListPageInToggle
-				menuItems={menuItems}
-				selectedMarkerId={selectedMarkerId}
-				setSelectedMarkerId={setSelectedMarkerId}
-			/>
+			<ListPageInToggle menuItems={menuItems} selectedMarkerId={selectedMarkerId} />
 			<ListPageMap
 				pharmacies={menuItems}
 				selectedMarkerId={selectedMarkerId}
