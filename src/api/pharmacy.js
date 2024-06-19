@@ -81,7 +81,7 @@ export const fetchAllMenuItemsByBookmark = async (userId) => {
 		if (pharmacyError) {
 			return alert(pharmacyError.message);
 		}
-		console.log(pharmacies);
+
 		return pharmacies;
 	} catch (error) {
 		alert(error.message);

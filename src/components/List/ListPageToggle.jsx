@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./ListPageStyle.css";
 import PharmacyItem from "./PharmacyItem";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
@@ -39,7 +40,7 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 					</div>
 					<div className="mt-4">
 						<ul>
-							<div className="px-4 py-2 flex items-center h-full">
+							<div className="px-8 py-2 flex items-center h-full">
 								<p className="text-[34px] font-bold text-green-400 inline-block">
 									{pharmacies.length > 0 && pharmacies[0]["place-area"].slice(0, -1)}
 								</p>

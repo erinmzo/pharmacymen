@@ -31,24 +31,3 @@ export const removeBookmark = async ({ userId, pharmacyId }) => {
 	}
 	return data;
 };
-
-export const fetchAllMenuItemsByBookmark = async (userId) => {
-	try {
-		const { data: bookmarks, error } = await supabase.from("bookmark").select("pharmacy_id").eq("user_id", userId);
-		const pharmacyIds = bookmarks.map((bookmark) => bookmark.pharmacy_id);
-		const { data: pharmacies, error: pharmacyError } = await supabase
-			.from("pharmacy")
-			.select("*")
-			.in("id", pharmacyIds);
-		if (error) {
-			return alert(error.message);
-		}
-		if (pharmacyError) {
-			return alert(pharmacyError.message);
-		}
-		console.log(pharmacies);
-		return pharmacies;
-	} catch (error) {
-		alert(error.message);
-	}
-};
