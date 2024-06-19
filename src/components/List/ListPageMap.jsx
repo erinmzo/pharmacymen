@@ -1,12 +1,17 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-function ListPageMap({ pharmacies }) {
-	const centerLatLon = { lat: pharmacies[0].lat, lng: pharmacies[0].lon };
+function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
+	const centerLatLon = { lat: Number(pharmacies[0].lat), lng: Number(pharmacies[0].lon - 0.06) };
 
 	const locations = pharmacies.map((pharmacy) => ({
+		id: pharmacy.id,
 		placeName: pharmacy["place-name"],
 		latlng: { lat: pharmacy.lat, lng: pharmacy.lon }
 	}));
+
+	const handleSelectMarkerId = (id) => {
+		setSelectedMarkerId(id);
+	};
 
 	return (
 		<div>
@@ -18,15 +23,16 @@ function ListPageMap({ pharmacies }) {
 				}}
 				level={7}
 			>
-				{locations.map((loc, idx) => (
+				{locations.map((location) => (
 					<MapMarker
-						key={`${loc.placeName}-${loc.latlng.lat}-${loc.latlng.lng}`}
-						position={loc.latlng}
+						onClick={() => handleSelectMarkerId(location.id)}
+						key={`${location.placeName}-${location.latlng.lat}-${location.latlng.lng}`}
+						position={location.latlng}
 						image={{
-							src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-							size: { width: 24, height: 35 }
+							src: selectedMarkerId === location.id ? "/img/icon-marker-selected.png" : "/img/icon-marker.png",
+							size: { width: 70, height: 70 }
 						}}
-						placeName={loc.placeName}
+						placeName={location.placeName}
 					/>
 				))}
 			</Map>
