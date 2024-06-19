@@ -38,7 +38,9 @@ export default function Detail() {
 				<div>
 					<p className="text-2xl font-black text-[24px] mb-5">{pharmacy["place-name"]}</p>
 					<p className="text-gray-700 text-[16px] font-medium mb-1.5">{pharmacy["address"]}</p>
-					<p className="text-gray-700 text-[16px] font-medium mb-12">전화번호 : {pharmacy["phone-number"]}</p>
+					<p className="text-gray-700 text-[16px] font-medium mb-12">
+						전화번호 : <a href={`tel:${pharmacy["phone-number"]}`}>{pharmacy["phone-number"]}</a>
+					</p>
 				</div>
 			</div>
 		</div>

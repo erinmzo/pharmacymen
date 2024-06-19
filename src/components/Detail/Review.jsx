@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addReview, deleteReview, getReviews, updateReview } from "../../api/review";
 import useAuthStore from "../../zustand/auth";
-//review list랑 form이랑 컴포넌트 분리하기
+
 function Review() {
 	const { detailId } = useParams();
 	const [comment, setComment] = useState("");

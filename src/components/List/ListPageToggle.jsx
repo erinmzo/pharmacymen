@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PharmacyList from "./PharmacyList";
+import PharmacyItem from "./PharmacyItem";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
@@ -56,7 +56,7 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 												: "bg-gray-50 hover:bg-gray-100"
 										}`}
 									>
-										<PharmacyList pharmacy={pharmacy} />
+										<PharmacyItem pharmacy={pharmacy} />
 									</div>
 								</li>
 							))}
