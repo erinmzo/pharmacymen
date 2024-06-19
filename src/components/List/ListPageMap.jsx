@@ -2,7 +2,6 @@ import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
 import useGeoLocation from "./GeoLocation.js";
 
 function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
-	const centerLatLon = { lat: Number(pharmacies[0].lat), lng: Number(pharmacies[0].lon - 0.06) };
 	const myLocation = useGeoLocation();
 
 	const locations = pharmacies.map((pharmacy) => ({
@@ -11,6 +10,24 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 		latlng: { lat: pharmacy.lat, lng: pharmacy.lon }
 	}));
 
+	const averageLatLng = () => {
+		let lats = 0;
+		let lngs = 0;
+
+		locations.forEach((location) => {
+			lats += Number(location.latlng.lat);
+			lngs += Number(location.latlng.lng);
+		});
+
+		const averageLat = lats / locations.length;
+		const averageLng = lngs / locations.length - 0.02;
+
+		console.log({ averageLat, averageLng });
+		return { lat: averageLat, lng: averageLng };
+	};
+
+	const centerLatLng = averageLatLng();
+
 	const handleSelectMarkerId = (id) => {
 		setSelectedMarkerId(id);
 	};
@@ -18,7 +35,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 	return (
 		<div>
 			<Map
-				center={centerLatLon}
+				center={centerLatLng}
 				style={{
 					width: "100%",
 					height: "100vh"
@@ -32,10 +49,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 						title="현재 위치"
 					/>
 				)}
-				<MarkerClusterer
-					averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-					minLevel={7} // 클러스터 할 최소 지도 레벨
-				>
+				<MarkerClusterer averageCenter={true} minLevel={6}>
 					{locations.map((location) => (
 						<MapMarker
 							onClick={() => handleSelectMarkerId(location.id)}
