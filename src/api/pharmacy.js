@@ -1,19 +1,6 @@
 import supabase from "../supabase/supabase";
 
-// export const fetchAllMenuItems = async () => {
-// 	try {
-// 		const { data, error } = await supabase.from("pharmacy").select("*");
-// 		if (error) {
-// 			alert(error.message);
-// 		}
-
-// 		return data;
-// 	} catch (error) {
-// 		alert(error.message);
-// 	}
-// };
-
-export const fetchMenuItems = async (lastFourDigits) => {
+export const getPharmacies = async (lastFourDigits) => {
 	try {
 		const { data, error } = await supabase
 			.from("pharmacy")
@@ -31,7 +18,7 @@ export const fetchMenuItems = async (lastFourDigits) => {
 	}
 };
 
-export const fetchItem = async (id) => {
+export const getPharmacy = async (id) => {
 	try {
 		const { data, error } = await supabase
 			.from("pharmacy")
@@ -49,7 +36,7 @@ export const fetchItem = async (id) => {
 	}
 };
 
-export const fetchReviewCount = async (pharmacyId) => {
+export const getReviewCount = async (pharmacyId) => {
 	try {
 		const { count, error } = await supabase
 			.from("review")
@@ -67,7 +54,7 @@ export const fetchReviewCount = async (pharmacyId) => {
 	}
 };
 
-export const fetchAllMenuItemsByBookmark = async (userId) => {
+export const getAllPharmacyByBookmark = async (userId) => {
 	if (!userId) {
 		return [];
 	}

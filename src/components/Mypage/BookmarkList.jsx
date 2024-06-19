@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { fetchAllMenuItemsByBookmark } from "../../api/pharmacy";
+import { getAllPharmacyByBookmark } from "../../api/pharmacy";
 import useAuthStore from "../../zustand/auth";
 import PharmacyItem from "../List/PharmacyItem";
 
@@ -22,7 +22,7 @@ function BookmarkList() {
 		isError
 	} = useQuery({
 		queryKey: ["bookmark", userInfo?.id],
-		queryFn: () => fetchAllMenuItemsByBookmark(userInfo?.id),
+		queryFn: () => getAllPharmacyByBookmark(userInfo?.id),
 		enabled: isUserInfoLoaded
 	});
 

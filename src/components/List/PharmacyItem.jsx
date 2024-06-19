@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { addBookmark, getPharmacyBookmarkByUserId, removeBookmark } from "../../api/bookmark";
-import { fetchReviewCount } from "../../api/pharmacy";
+import { getReviewCount } from "../../api/pharmacy";
 import useAuthStore from "../../zustand/auth";
 import BookmarkButton from "./BookmarkButton";
 
@@ -13,7 +13,7 @@ function PharmacyItem({ pharmacy }) {
 
 	const { data: reviewCount } = useQuery({
 		queryKey: ["reviewCount", pharmacy.id],
-		queryFn: () => fetchReviewCount(pharmacy.id),
+		queryFn: () => getReviewCount(pharmacy.id),
 		staleTime: 1000 * 60 * 5 // 5분 후 갱신
 	});
 
