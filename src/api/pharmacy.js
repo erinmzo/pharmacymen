@@ -13,6 +13,19 @@ export const fetchAllMenuItems = async () => {
 	}
 };
 
+export const fetchAllMenuItemsByBookmark = async () => {
+	try {
+		const { data, error } = await supabase.from("pharmacy").select(`*,bookmark(count)`);
+		if (error) {
+			alert(error.message);
+		}
+		console.log(data);
+		return data;
+	} catch (error) {
+		alert(error.message);
+	}
+};
+
 export const fetchMenuItems = async (lastFourDigits) => {
 	try {
 		const { data, error } = await supabase

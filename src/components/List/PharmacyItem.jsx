@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { addBookmark, getPharmacyBookmarkByUserId } from "../../api/bookmark";
+import { addBookmark, getPharmacyBookmarkByUserId, removeBookmark } from "../../api/bookmark";
 import useAuthStore from "../../zustand/auth";
 import BookmarkButton from "./BookmarkButton";
 
@@ -11,32 +11,52 @@ function PharmacyItem({ pharmacy }) {
 	const queryClient = useQueryClient();
 
 	const { data: bookmark } = useQuery({
-		queryKey: ["bookmark"],
-		queryFn: () => getPharmacyBookmarkByUserId(userInfo.id),
-		enabled: !!userInfo,
+		queryKey: ["bookmark", userInfo?.id, pharmacy?.id],
+		queryFn: () => getPharmacyBookmarkByUserId({ userId: userInfo.id, pharmacyId: pharmacy.id }),
+		enabled: !!userInfo
+	});
+
+	useEffect(() => {
+		if (bookmark) {
+			setIsBookmark(true);
+		} else {
+			setIsBookmark(false);
+		}
+	}, [bookmark]);
+
+	//console.log(bookmark);
+
+	const { mutate: clickAddBookmark } = useMutation({
+		mutationFn: (bookmarkInfo) => addBookmark(bookmarkInfo),
 		onSuccess: () => {
-			if (bookmark.pharmacy_id === pharmacy.id) {
-				setIsBookmark(true);
-			}
+			queryClient.invalidateQueries(["bookmark", userInfo?.id, pharmacy?.id]);
 		}
 	});
 
-	console.log(bookmark);
-
-	const { mutate: clickBookmark } = useMutation({
-		mutationFn: (bookmarkInfo) => addBookmark(bookmarkInfo),
-		onSuccess: queryClient.invalidateQueries(["bookmark"])
+	const { mutate: clickRemoveBookmark } = useMutation({
+		mutationFn: (bookmarkInfo) => removeBookmark(bookmarkInfo),
+		onSuccess: () => {
+			queryClient.invalidateQueries(["bookmark", userInfo?.id, pharmacy?.id]);
+		}
 	});
 
 	const handleBookmark = (clickedPharmacy) => {
+		if (!userInfo) {
+			alert("로그인이 필요합니다.");
+			return;
+		}
 		const bookmarkInfo = {
 			userId: userInfo.id,
 			pharmacyId: clickedPharmacy
 		};
 
-		clickBookmark(bookmarkInfo);
-
-		//setIsBookmark((prev) => !prev);
+		if (!isBookmark) {
+			clickAddBookmark(bookmarkInfo);
+			setIsBookmark(true);
+		} else {
+			clickRemoveBookmark(bookmarkInfo);
+			setIsBookmark(false);
+		}
 	};
 	return (
 		<div className="relative">
