@@ -39,7 +39,7 @@ function Review() {
 	};
 
 	return (
-		<div className="flex flex-col items-center">
+		<div className="flex flex-col items-center mb-36">
 			<div className="w-[670px]">
 				<h2 className="text-xl font-bold text-[24px] mb-5">⭐️ 약국 후기를 남겨주세요!</h2>
 				<form onSubmit={submitHandler} className="flex flex-col mb-5 border-b-2 border-green-400 pb-5">
