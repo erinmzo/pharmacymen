@@ -22,7 +22,6 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 		const averageLat = (lats / locations.length).toFixed(5);
 		const averageLng = (lngs / locations.length).toFixed(5) - 0.04;
 
-		console.log({ averageLat, averageLng });
 		return { lat: averageLat, lng: averageLng };
 	};
 
