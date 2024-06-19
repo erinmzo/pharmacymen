@@ -20,7 +20,6 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 	}, []);
 
 	const handleSuccess = (response) => {
-		console.log(response);
 		const { latitude, longitude } = response.coords;
 		setMyLocation({ latitude, longitude });
 	};
