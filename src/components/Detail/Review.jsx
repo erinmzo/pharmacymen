@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getReviews, addReview, updateReview, deleteReview } from "../../api/Review"; // updateReview, deleteReview 추가
+import { getReviews, addReview, updateReview, deleteReview } from "../../api/Review";
 import useAuthStore from "../../zustand/Auth";
-//review list랑 form이랑 컴포넌트 분리하기
+
 function Review() {
 	const { detailId } = useParams();
 	const [comment, setComment] = useState("");
