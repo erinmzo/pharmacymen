@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { logOut } from "../../api/auth";
-import useAuthStore from "../../zustand/Auth";
+import useAuthStore from "../../zustand/auth";
 
 function HeaderLogin() {
 	const { detailId } = useParams();
