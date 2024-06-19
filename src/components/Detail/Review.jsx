@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReviews, addReview, updateReview, deleteReview } from "../../api/Review"; // updateReview, deleteReview 추가
-import useAuthStore from "../../zustand/Auth";
+import { addReview, deleteReview, getReviews, updateReview } from "../../api/review";
+import useAuthStore from "../../zustand/auth";
 //review list랑 form이랑 컴포넌트 분리하기
 function Review() {
 	const { detailId } = useParams();
