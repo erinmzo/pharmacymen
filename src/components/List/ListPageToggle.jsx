@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import PharmacyList from "./PharmacyList";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
 import "./ListPageStyle.css";
 
-function ListPageInToggle({ menuItems, selectedMarkerId }) {
+function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
 	const navigate = useNavigate();
 	const refs = useRef([]);
@@ -41,27 +42,23 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 						<ul>
 							<div className="px-8 py-2 flex items-center h-full">
 								<p className="text-[34px] font-bold text-green-400 inline-block">
-									{menuItems.length > 0 && menuItems[0]["place-area"].slice(0, -1)}
+									{pharmacies.length > 0 && pharmacies[0]["place-area"].slice(0, -1)}
 								</p>
-								<p className="text-[18px] inline-block px-2">총 검색 결과는 {menuItems.length}개입니다.</p>
+								<p className="text-[18px] inline-block px-2">총 검색 결과는 {pharmacies.length}개입니다.</p>
 							</div>
 
-							{menuItems.map((item, index) => (
+							{pharmacies.map((pharmacy, index) => (
 								<li key={index} className="px-4">
-									<Link to={`/list/detail/${item.id}`}>
-										<div
-											ref={(el) => (refs.current[item.id] = el)}
-											className={`block px-4 py-6 border-b-2 border-gray-200 ${
-												selectedMarkerId === item.id
-													? "bg-yellow-100 hover:bg-yellow-200"
-													: "bg-gray-50 hover:bg-gray-100"
-											}`}
-										>
-											<div className="text-[28px] font-bold ">{item["place-name"]}</div>
-											<div className="text-[18px]">{item.address}</div>
-											<div className="text-[18px]">{item["phone-number"]}</div>
-										</div>
-									</Link>
+									<div
+										ref={(el) => (refs.current[pharmacy.id] = el)}
+										className={`block px-4 py-6 border-b-2 border-gray-200 ${
+											selectedMarkerId === pharmacy.id
+												? "bg-yellow-100 hover:bg-yellow-200"
+												: "bg-gray-50 hover:bg-gray-100"
+										}`}
+									>
+										<PharmacyList pharmacy={pharmacy} />
+									</div>
 								</li>
 							))}
 						</ul>
@@ -80,4 +77,4 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 	);
 }
 
-export default ListPageInToggle;
+export default ListPageToggle;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { joinUser } from "../../api/Auth";
+import { joinUser } from "../../api/auth";
 
 function JoinForm() {
 	const navigate = useNavigate();
@@ -61,6 +61,7 @@ function JoinForm() {
 							type="password"
 							id="userPwConfirm"
 							value={userPwConfirm}
+							placeholder="비밀번호 재입력"
 							onChange={(e) => setUserPwConfirm(e.target.value)}
 							className="p-[12px] w-[324px] border-2 rounded-md border-green-400"
 						/>
