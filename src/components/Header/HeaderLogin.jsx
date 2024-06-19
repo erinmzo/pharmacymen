@@ -9,8 +9,8 @@ function HeaderLogin() {
 	const userInfo = useAuthStore((state) => state.userInfo);
 	const handleLogout = async () => {
 		saveUserInfo(null);
-		await logOut();
 		navigate("/");
+		await logOut();
 	};
 
 	return (
