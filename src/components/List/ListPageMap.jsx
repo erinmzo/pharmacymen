@@ -19,8 +19,8 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 			lngs += Number(location.latlng.lng);
 		});
 
-		const averageLat = lats / locations.length;
-		const averageLng = lngs / locations.length - 0.02;
+		const averageLat = (lats / locations.length).toFixed(5);
+		const averageLng = (lngs / locations.length).toFixed(5) - 0.04;
 
 		console.log({ averageLat, averageLng });
 		return { lat: averageLat, lng: averageLng };
@@ -40,7 +40,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 					width: "100%",
 					height: "100vh"
 				}}
-				level={5}
+				level={7}
 			>
 				{myLocation && (
 					<MapMarker
