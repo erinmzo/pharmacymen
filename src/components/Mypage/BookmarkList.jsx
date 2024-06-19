@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { fetchAllMenuItemsByBookmark } from "../../api/pharmacy";
 import useAuthStore from "../../zustand/auth";
 import PharmacyItem from "../List/PharmacyItem";
-import { useEffect, useState } from "react";
 
 function BookmarkList() {
 	const userInfo = useAuthStore((state) => state.userInfo);
@@ -11,6 +11,8 @@ function BookmarkList() {
 	useEffect(() => {
 		if (userInfo && userInfo.id) {
 			setIsUserInfoLoaded(true);
+		} else {
+			setIsUserInfoLoaded(false);
 		}
 	}, [userInfo]);
 

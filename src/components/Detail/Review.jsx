@@ -55,10 +55,8 @@ function Review() {
 			alert("로그인 후 이용해주세요.");
 			return;
 		}
-		const email = userInfo?.user?.email;
-		const nickname = email?.split("@")[0];
-		console.log("Nickname:", nickname); // 콘솔 로그 추가
-		console.log("Comment:", comment); // 콘솔 로그 추가
+		const userEmail = userInfo?.user?.email;
+		const nickname = userEmail?.split("@")[0];
 		addMutation.mutate({ nickname, comment, pharmacy_id: detailId });
 		setComment("");
 	};
