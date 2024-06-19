@@ -1,21 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllMenuItemsByBookmark } from "../../api/pharmacy";
-import PharmacyItem from "../List/PharmacyItem";
+import useAuthStore from "../../zustand/auth";
 
 function BookmarkList() {
+	const userInfo = useAuthStore((state) => state.userInfo);
 	const { data: pharmacies = [] } = useQuery({
-		queryKey: ["pharmacy", userId],
-		queryFn: fetchAllMenuItemsByBookmark
+		queryKey: ["pharmacy", userInfo?.id],
+		queryFn: fetchAllMenuItemsByBookmark,
+		enabled: !!userInfo
 	});
+	console.log(pharmacies);
 
 	return (
-		<div>
-			{pharmacies.map((pharmacy) => (
-				<li key={pharmacy.id} className="px-4">
-					<PharmacyItem pharmacy={pharmacy} />
-				</li>
-			))}
-		</div>
+		<div>hello</div>
+		// <div>
+		// 	{pharmacies.map((pharmacy) => (
+		// 		<li key={pharmacy.id} className="px-4">
+		// 			<PharmacyItem pharmacy={pharmacy} />
+		// 		</li>
+		// 	))}
+		// </div>
 	);
 }
 

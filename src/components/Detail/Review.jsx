@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addReview, deleteReview, getReviews, updateReview } from "../../api/review";
 import useAuthStore from "../../zustand/auth";
-
 function Review() {
 	const { detailId } = useParams();
 	const [comment, setComment] = useState("");

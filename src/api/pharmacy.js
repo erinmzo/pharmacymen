@@ -15,7 +15,7 @@ export const fetchAllMenuItems = async () => {
 
 export const fetchAllMenuItemsByBookmark = async () => {
 	try {
-		const { data, error } = await supabase.from("pharmacy").select(`*,bookmark(count)`);
+		const { data, error } = await supabase.from("pharmacy").select(`*, bookmark(user_id)`);
 		if (error) {
 			alert(error.message);
 		}
