@@ -29,20 +29,20 @@ function ListPageInToggle({ menuItems, selectedMarkerId }) {
 							<img src={backIcon} alt="Back Icon" />
 						</button>
 					</div>
-					<nav className={`mt-4 ${isToggled ? "block" : "hidden"}`}>
-						<ul className="">
-							<div className="px-4 py-2">
+					<nav className="mt-4">
+						<ul>
+							<div className="px-4 py-2 flex items-center h-full">
 								<p className="text-[34px] font-bold text-green-400 inline-block">
-									{menuItems.length > 0 && menuItems[0]["place-area"].slice(0, 2)}
+									{menuItems.length > 0 && menuItems[0]["place-area"].slice(0, -1)}
 								</p>
-								<p className="text-[18px] inline-block px-2">총 검색 결과는 {menuItems.length}개 입니다.</p>
+								<p className="text-[18px] inline-block px-2">총 검색 결과는 {menuItems.length}개입니다.</p>
 							</div>
 
 							{menuItems.map((item, index) => (
-								<li key={index}>
+								<li key={index} className="px-4">
 									<Link to={`/list/detail/${item.id}`}>
 										<div
-											className={`block px-4 py-6 border-b border-gray-200 ${
+											className={`block py-6 border-b-2 border-gray-200 ${
 												selectedMarkerId === item.id
 													? "bg-yellow-100 hover:bg-yellow-200"
 													: "bg-gray-50 hover:bg-gray-100"
