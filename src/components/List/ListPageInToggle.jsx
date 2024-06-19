@@ -1,26 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { fetchMenuItems } from "../../api/pharmacy";
+import { Link, useNavigate } from "react-router-dom";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
 
-function ListPageInToggle() {
+function ListPageInToggle({ menuItems }) {
 	const [isToggled, setIsToggled] = useState(true);
-	const location = useLocation();
 	const navigate = useNavigate();
-
-	const lastFourDigits = location.pathname.slice(-4);
-
-	const {
-		data: menuItems,
-		error,
-		isLoading
-	} = useQuery({
-		queryKey: ["menuItems", lastFourDigits],
-		queryFn: () => fetchMenuItems(lastFourDigits)
-	});
 
 	const handleToggle = () => {
 		setIsToggled(!isToggled);
@@ -29,14 +15,6 @@ function ListPageInToggle() {
 	const handleBack = () => {
 		navigate(-1);
 	};
-
-	if (isLoading) {
-		return <div>Loading...</div>;
-	}
-
-	if (error) {
-		return <div>Error: {error.message}</div>;
-	}
 
 	return (
 		<>

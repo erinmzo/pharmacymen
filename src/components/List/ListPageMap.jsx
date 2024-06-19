@@ -1,25 +1,6 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { fetchMenuItems } from "../../api/pharmacy";
-import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "react-router-dom";
 
-function ListPageMap() {
-	const location = useLocation();
-	const lastFourDigits = location.pathname.slice(-4);
-
-	const {
-		data: pharmacies = [],
-		isLoading,
-		error
-	} = useQuery({
-		queryKey: ["pharmacies", lastFourDigits],
-		queryFn: () => fetchMenuItems(lastFourDigits)
-	});
-
-	if (isLoading) return <p>Loading...</p>;
-	if (error) return <p>Error fetching pharmacies</p>;
-	if (pharmacies.length === 0) return <p>No pharmacies found</p>;
-
+function ListPageMap({ pharmacies }) {
 	const centerLatLon = { lat: pharmacies[0].lat, lng: pharmacies[0].lon };
 
 	const locations = pharmacies.map((pharmacy) => ({
