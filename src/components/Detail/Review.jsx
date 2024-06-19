@@ -55,7 +55,7 @@ function Review() {
 			alert("로그인 후 이용해주세요.");
 			return;
 		}
-		const userEmail = userInfo?.user?.email;
+		const userEmail = userInfo?.email;
 		const nickname = userEmail?.split("@")[0];
 		addMutation.mutate({ nickname, comment, pharmacy_id: detailId });
 		setComment("");
@@ -106,7 +106,7 @@ function Review() {
 										<div className="text-[18px] text-gray-700 w-[100px] truncate">{review.nick_name}</div>
 										<p className="text-[18px] text-gray-700 truncate w-[380px]">{review.comment}</p>
 									</div>
-									{userInfo && review.nick_name === userInfo?.user?.email.split("@")[0] && (
+									{userInfo && review.nick_name === userInfo?.email.split("@")[0] && (
 										<div className="flex space-x-2">
 											{editMode === review.id ? (
 												<button
