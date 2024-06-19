@@ -57,6 +57,8 @@ function Review() {
 		}
 		const email = userInfo?.user?.email;
 		const nickname = email?.split("@")[0];
+		console.log("Nickname:", nickname); // 콘솔 로그 추가
+		console.log("Comment:", comment); // 콘솔 로그 추가
 		addMutation.mutate({ nickname, comment, pharmacy_id: detailId });
 		setComment("");
 	};
