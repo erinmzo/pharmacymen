@@ -4,6 +4,7 @@ import JoinPage from "../pages/JoinPage";
 import ListPage from "../pages/ListPage";
 import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage";
+import Mypage from "../pages/Mypage";
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
 	{
 		path: "/join",
 		element: <JoinPage />
+	},
+	{
+		path: "/my-page",
+		element: <Mypage />
 	}
 ]);
 export default router;
