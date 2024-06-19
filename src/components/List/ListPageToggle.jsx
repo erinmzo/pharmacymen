@@ -4,7 +4,7 @@ import PharmacyList from "./PharmacyList";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
-import "./ListPageStyle.css";
+import "./listPageStyle.css";
 
 function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
