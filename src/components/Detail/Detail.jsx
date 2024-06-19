@@ -13,7 +13,7 @@ export default function Detail() {
 		error
 	} = useQuery({
 		queryKey: ["pharmacy", detailId],
-		queryFn: fetchItem
+		queryFn: () => fetchItem(detailId)
 	});
 
 	if (isPending) return <Loading />;
