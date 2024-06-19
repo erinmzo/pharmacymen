@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchReviewCount } from "../../api/Review";
+import { fetchReviewCount } from "../../api/pharmacy";
 
 function PharmacyList({ pharmacy }) {
 	const [isBookmark, setIsBookmark] = useState(false);
