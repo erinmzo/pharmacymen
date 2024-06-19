@@ -2,14 +2,35 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAllMenuItemsByBookmark } from "../../api/pharmacy";
 import useAuthStore from "../../zustand/auth";
 import PharmacyItem from "../List/PharmacyItem";
+import { useEffect, useState } from "react";
 
 function BookmarkList() {
 	const userInfo = useAuthStore((state) => state.userInfo);
-	const { data: pharmacies = [] } = useQuery({
+	const [isUserInfoLoaded, setIsUserInfoLoaded] = useState(false);
+
+	useEffect(() => {
+		if (userInfo && userInfo.id) {
+			setIsUserInfoLoaded(true);
+		}
+	}, [userInfo]);
+
+	const {
+		data: pharmacies = [],
+		isLoading,
+		isError
+	} = useQuery({
 		queryKey: ["bookmark", userInfo?.id],
 		queryFn: () => fetchAllMenuItemsByBookmark(userInfo?.id),
-		enabled: !!userInfo
+		enabled: isUserInfoLoaded
 	});
+
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
+
+	if (isError) {
+		return <div>Error loading pharmacies</div>;
+	}
 
 	return (
 		<div className="w-[480px] mx-auto my-[80px]">

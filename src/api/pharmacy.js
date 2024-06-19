@@ -68,22 +68,38 @@ export const fetchReviewCount = async (pharmacyId) => {
 };
 
 export const fetchAllMenuItemsByBookmark = async (userId) => {
+	if (!userId) {
+		return [];
+	}
+
 	try {
-		const { data: bookmarks, error } = await supabase.from("bookmark").select("pharmacy_id").eq("user_id", userId);
+		const { data: bookmarks, error: bookmarkError } = await supabase
+			.from("bookmark")
+			.select("pharmacy_id")
+			.eq("user_id", userId);
+
+		if (bookmarkError) {
+			throw new Error(bookmarkError.message);
+		}
+
+		if (!bookmarks || bookmarks.length === 0) {
+			return [];
+		}
+
 		const pharmacyIds = bookmarks.map((bookmark) => bookmark.pharmacy_id);
+
 		const { data: pharmacies, error: pharmacyError } = await supabase
 			.from("pharmacy")
 			.select("*")
 			.in("id", pharmacyIds);
-		if (error) {
-			return alert(error.message);
-		}
+
 		if (pharmacyError) {
-			return alert(pharmacyError.message);
+			throw new Error(pharmacyError.message);
 		}
 
 		return pharmacies;
 	} catch (error) {
-		alert(error.message);
+		console.error("Error fetching pharmacies by bookmark:", error.message);
+		throw new Error("Failed to fetch pharmacies by bookmark");
 	}
 };
