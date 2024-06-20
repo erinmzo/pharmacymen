@@ -65,10 +65,10 @@ function PharmacyItem({ pharmacy }) {
 					<ReviewInfo pharmacy={pharmacy} />
 				</div>
 				<div className="text-[18px]">{pharmacy.address}</div>
-				<div className="text-[18px] hover:underline">
-					<a href={`tel:${pharmacy["phone-number"]}`}>{pharmacy["phone-number"]}</a>
-				</div>
 			</Link>
+			<div className="text-[18px] hover:underline">
+				<a href={`tel:${pharmacy["phone-number"]}`}>{pharmacy["phone-number"]}</a>
+			</div>
 			{userInfo && <BookmarkButton pharmacy={pharmacy} handleBookmark={handleBookmark} isBookmark={isBookmark} />}
 		</div>
 	);
