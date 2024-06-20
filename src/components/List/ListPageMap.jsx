@@ -7,7 +7,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 	const locations = pharmacies.map((pharmacy) => ({
 		id: pharmacy.id,
 		placeName: pharmacy["place-name"],
-		latlng: { lat: pharmacy.lat, lng: pharmacy.lon }
+		latlng: { lat: pharmacy.lat, lng: pharmacy.lng }
 	}));
 
 	const averageLatLng = () => {

@@ -4,7 +4,7 @@ export const getPharmacies = async (lastFourDigits) => {
 	try {
 		const { data, error } = await supabase
 			.from("pharmacy")
-			.select("id, place-name, address, phone-number, place-area, lat, lon")
+			.select("id, place-name, address, phone-number, place-area, lat, lng")
 			.eq("place-code", Number(lastFourDigits));
 
 		if (error) {
@@ -22,7 +22,7 @@ export const getPharmacy = async (id) => {
 	try {
 		const { data, error } = await supabase
 			.from("pharmacy")
-			.select("id, place-name, address, phone-number, place-area, lat, lon")
+			.select("id, place-name, address, phone-number, place-area, lat, lng")
 			.eq("id", id)
 			.single();
 
