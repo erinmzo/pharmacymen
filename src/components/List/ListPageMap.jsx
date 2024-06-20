@@ -44,7 +44,7 @@ function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 				{myLocation && (
 					<MapMarker
 						position={{ lat: myLocation.latitude, lng: myLocation.longitude }}
-						image={{ src: "/img/icon-marker-mylocation.png", size: { width: 70, height: 70 }, title: "현재 위치" }}
+						image={{ src: "/img/icon-marker-mylocation.png", size: { width: 70, height: 70 } }}
 						title="현재 위치"
 					/>
 				)}
