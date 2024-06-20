@@ -1,5 +1,5 @@
 import { Map, MapMarker, MarkerClusterer } from "react-kakao-maps-sdk";
-import useGeoLocation from "./GeoLocation.js";
+import useGeoLocation from "../../utils/GeoLocation.js";
 
 function ListPageMap({ pharmacies, selectedMarkerId, setSelectedMarkerId }) {
 	const myLocation = useGeoLocation();

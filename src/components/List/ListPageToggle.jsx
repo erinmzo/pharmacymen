@@ -5,7 +5,6 @@ import PharmacyItem from "./PharmacyItem";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
-import "./ListPageStyle.css";
 
 function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
@@ -40,14 +39,13 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 						</button>
 					</div>
 					<div className="mt-20 w-full h-full overflow-y-auto custom-scrollbar">
+						<div className="px-8 py-2 flex items-center">
+							<p className="text-[34px] font-bold text-green-400 inline-block">
+								{pharmacies.length > 0 && pharmacies[0]["place-area"].slice(0, -1)}
+							</p>
+							<p className="text-[18px] inline-block px-2">총 검색 결과는 {pharmacies.length}개입니다.</p>
+						</div>
 						<ul>
-							<div className="px-8 py-2 flex items-center h-full">
-								<p className="text-[34px] font-bold text-green-400 inline-block">
-									{pharmacies.length > 0 && pharmacies[0]["place-area"].slice(0, -1)}
-								</p>
-								<p className="text-[18px] inline-block px-2">총 검색 결과는 {pharmacies.length}개입니다.</p>
-							</div>
-
 							{pharmacies.map((pharmacy) => (
 								<li key={pharmacy.id} className="px-4">
 									<div
@@ -65,7 +63,7 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 						</ul>
 					</div>
 				</div>
-				<div className="absolute right-[-48px] top-0 z-[101] h-full flex items-center">
+				<div className="absolute right-[-48px] top-[400px] z-[101] flex items-center">
 					<button
 						onClick={handleToggle}
 						className="bg-green-400 text-white w-12 h-12 rounded-r-full flex items-center justify-center"

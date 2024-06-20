@@ -7,8 +7,7 @@ export const getReviews = async (pharmacy_id) => {
 		.eq("pharmacy_id", pharmacy_id);
 
 	if (error) {
-		alert("불러오기에 실패했습니다.");
-		throw error;
+		alert(`리뷰 정보를 가져오는 데 실패했습니다. error:${error}`);
 	}
 
 	const formatDate = data.map((review) => ({

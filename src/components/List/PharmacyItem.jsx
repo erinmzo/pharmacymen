@@ -2,20 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { addBookmark, getPharmacyBookmarkByUserId, removeBookmark } from "../../api/bookmark";
-import { getReviewCount } from "../../api/pharmacy";
 import useAuthStore from "../../zustand/auth";
-import BookmarkButton from "./BookmarkButton";
+import BookmarkButton from "./BookmarkButton/BookmarkButton";
+import ReviewInfo from "./ReviewInfo/ReviewInfo";
 
 function PharmacyItem({ pharmacy }) {
 	const [isBookmark, setIsBookmark] = useState(false);
 	const userInfo = useAuthStore((state) => state.userInfo);
 	const queryClient = useQueryClient();
-
-	const { data: reviewCount } = useQuery({
-		queryKey: ["reviewCount", pharmacy.id],
-		queryFn: () => getReviewCount(pharmacy.id),
-		staleTime: 1000 * 60 * 5 // 5분 후 갱신
-	});
 
 	const { data: bookmark } = useQuery({
 		queryKey: ["bookmark", userInfo?.id, pharmacy?.id],
@@ -68,7 +62,7 @@ function PharmacyItem({ pharmacy }) {
 			<Link to={`/list/detail/${pharmacy.id}`}>
 				<div className="flex items-center h-full">
 					<div className="text-[28px] font-bold inline-block">{pharmacy["place-name"]}</div>
-					<div className="text-gray-400 px-2 inline-block">리뷰{reviewCount > 999 ? "999+" : reviewCount}</div>
+					<ReviewInfo pharmacy={pharmacy} />
 				</div>
 				<div className="text-[18px]">{pharmacy.address}</div>
 				<div className="text-[18px]">{pharmacy["phone-number"]}</div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addReview, deleteReview, getReviews, updateReview } from "../../api/review";
 import useAuthStore from "../../zustand/auth";
+import Loading from "../Loading/Loading";
 function Review() {
 	const { detailId } = useParams();
 	const [comment, setComment] = useState("");
@@ -43,7 +44,7 @@ function Review() {
 		}
 	});
 
-	if (isLoading) return <>Loading...</>;
+	if (isLoading) return <Loading />;
 
 	if (error) {
 		return <div>에러가 발생했습니다: {error.message}</div>;

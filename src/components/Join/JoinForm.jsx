@@ -14,10 +14,15 @@ function JoinForm() {
 			email: userId,
 			password: userPw
 		};
+
+		if (userPw !== userPwConfirm) {
+			return alert("비밀번호가 일치 하지 않습니다.");
+		}
+
 		const error = await joinUser(userInfo);
 
 		if (error) {
-			alert(error.message);
+			alert(`회원가입에 실패했습니다. error: ${error.message}`);
 		} else {
 			alert("회원가입이 성공적으로 완료되었습니다.");
 			navigate("/login");

@@ -8,13 +8,12 @@ export const getPharmacies = async (lastFourDigits) => {
 			.eq("place-code", Number(lastFourDigits));
 
 		if (error) {
-			throw new Error(error.message);
+			alert(`약국 정보를 가져오는 데 실패했습니다. error:${error}`);
 		}
 
 		return data;
 	} catch (error) {
 		console.error("Error fetching menu items:", error.message);
-		throw new Error("Failed to fetch menu items");
 	}
 };
 
@@ -27,12 +26,12 @@ export const getPharmacy = async (id) => {
 			.single();
 
 		if (error) {
-			throw new Error(error.message);
+			alert(`약국 정보를 가져오는 데 실패했습니다. error:${error}`);
 		}
+
 		return data;
 	} catch (error) {
 		console.error("Error fetching item:", error.message);
-		throw new Error("Failed to fetch item");
 	}
 };
 
@@ -44,13 +43,12 @@ export const getReviewCount = async (pharmacyId) => {
 			.eq("pharmacy_id", pharmacyId);
 
 		if (error) {
-			throw new Error(error.message);
+			alert(`리뷰 정보를 가져오는 데 실패했습니다. error:${error}`);
 		}
 
 		return count;
 	} catch (error) {
 		console.error("Error fetching item:", error.message);
-		throw new Error("Failed to fetch item");
 	}
 };
 
@@ -66,7 +64,7 @@ export const getAllPharmacyByBookmark = async (userId) => {
 			.eq("user_id", userId);
 
 		if (bookmarkError) {
-			throw new Error(bookmarkError.message);
+			alert(`정보를 가져오는 데 실패했습니다. error:${error}`);
 		}
 
 		if (!bookmarks || bookmarks.length === 0) {
@@ -81,12 +79,11 @@ export const getAllPharmacyByBookmark = async (userId) => {
 			.in("id", pharmacyIds);
 
 		if (pharmacyError) {
-			throw new Error(pharmacyError.message);
+			alert(`정보를 가져오는 데 실패했습니다. error:${error}`);
 		}
 
 		return pharmacies;
 	} catch (error) {
 		console.error("Error fetching pharmacies by bookmark:", error.message);
-		throw new Error("Failed to fetch pharmacies by bookmark");
 	}
 };

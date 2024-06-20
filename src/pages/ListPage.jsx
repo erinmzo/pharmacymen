@@ -22,7 +22,7 @@ function ListPage() {
 
 	if (isPending) return <Loading />;
 
-	if (error) return <div>Error fetching pharmacies</div>;
+	if (error) return <div>약국 정보를 불러오는 데 실패했습니다.</div>;
 
 	return (
 		<>

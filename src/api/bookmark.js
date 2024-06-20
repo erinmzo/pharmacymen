@@ -8,7 +8,9 @@ export async function getPharmacyBookmarkByUserId({ userId, pharmacyId }) {
 		.eq("pharmacy_id", pharmacyId)
 		.maybeSingle();
 
-	if (error) throw error;
+	if (error) {
+		alert(`정보를 가져오는 데 실패했습니다. error:${error}`);
+	}
 
 	return data;
 }

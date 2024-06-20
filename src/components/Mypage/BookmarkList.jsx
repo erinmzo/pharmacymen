@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getAllPharmacyByBookmark } from "../../api/pharmacy";
 import useAuthStore from "../../zustand/auth";
 import PharmacyItem from "../List/PharmacyItem";
+import Loading from "../Loading/Loading";
 
 function BookmarkList() {
 	const userInfo = useAuthStore((state) => state.userInfo);
@@ -27,11 +28,11 @@ function BookmarkList() {
 	});
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <Loading />;
 	}
 
 	if (isError) {
-		return <div>Error loading pharmacies</div>;
+		return <div>약국 정보를 불러오는 데 실패했습니다.</div>;
 	}
 
 	return (
