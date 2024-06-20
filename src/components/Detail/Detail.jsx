@@ -33,12 +33,12 @@ export default function Detail() {
 		<div className="flex flex-col items-center mb-5 mt-[50px]">
 			<div className="w-[670px]">
 				<Map
-					center={{ lat: pharmacy.lat, lng: pharmacy.lon }}
+					center={{ lat: pharmacy.lat, lng: pharmacy.lng }}
 					style={{ width: "100%", height: "400px", marginBottom: "30px" }}
 					level={3}
 				>
 					<MapMarker
-						position={{ lat: pharmacy.lat, lng: pharmacy.lon }}
+						position={{ lat: pharmacy.lat, lng: pharmacy.lng }}
 						image={{
 							src: "/img/icon-marker.png",
 							size: { width: 70, height: 70 }
