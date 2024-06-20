@@ -41,6 +41,7 @@ function JoinForm() {
 							id="userId"
 							value={userId}
 							onChange={(e) => setUserId(e.target.value)}
+							maxLength={40}
 							placeholder="이메일 형식만 가능합니다."
 							className="p-[12px] w-[324px] border-2 rounded-md border-green-400"
 						/>
@@ -54,6 +55,7 @@ function JoinForm() {
 							id="userPw"
 							value={userPw}
 							placeholder="6자리 이상 입력해주세요."
+							maxLength={40}
 							onChange={(e) => setUserPw(e.target.value)}
 							className="p-[12px] w-[324px] border-2 rounded-md border-green-400"
 						/>
@@ -67,6 +69,7 @@ function JoinForm() {
 							id="userPwConfirm"
 							value={userPwConfirm}
 							placeholder="비밀번호 재입력"
+							maxLength={40}
 							onChange={(e) => setUserPwConfirm(e.target.value)}
 							className="p-[12px] w-[324px] border-2 rounded-md border-green-400"
 						/>
