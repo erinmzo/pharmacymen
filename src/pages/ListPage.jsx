@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { fetchMenuItems } from "../api/pharmacy";
-
+import { getPharmacies } from "../api/pharmacy";
 import ListPageMap from "../components/List/ListPageMap";
 import ListPageToggle from "../components/List/ListPageToggle";
 import Loading from "../components/Loading/Loading";
@@ -18,7 +17,7 @@ function ListPage() {
 		isPending
 	} = useQuery({
 		queryKey: ["menuItems", lastFourDigits],
-		queryFn: () => fetchMenuItems(lastFourDigits)
+		queryFn: () => getPharmacies(lastFourDigits)
 	});
 
 	if (isPending) return <Loading />;

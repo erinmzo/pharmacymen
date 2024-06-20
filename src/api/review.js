@@ -1,7 +1,5 @@
 import supabase from "../supabase/supabase";
 
-// 기존의 getReviews, addReview 함수도 이 파일에 포함되어 있습니다.
-
 export const getReviews = async (pharmacy_id) => {
 	const { data, error } = await supabase
 		.from("review")
@@ -22,6 +20,7 @@ export const getReviews = async (pharmacy_id) => {
 };
 
 export const addReview = async ({ nickname, comment, pharmacy_id }) => {
+	console.log("Adding review:", { nickname, comment, pharmacy_id });
 	const { data, error } = await supabase.from("review").insert([
 		{
 			nick_name: nickname,
