@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useParams } from "react-router-dom";
 import { getPharmacy } from "../../api/pharmacy";
+import PharmacyItem from "../List/PharmacyItem";
 import Loading from "../Loading/Loading";
 
 export default function Detail() {
@@ -57,16 +58,7 @@ export default function Detail() {
 						)}
 					</MapMarker>
 				</Map>
-				<div>
-					<p className="text-2xl font-black text-[24px] mb-5">{pharmacy["place-name"]}</p>
-					<p className="text-gray-700 text-[16px] font-medium mb-1.5">{pharmacy["address"]}</p>
-					<p className="text-gray-700 text-[16px] font-medium mb-12">
-						전화번호 :{" "}
-						<a href={`tel:${pharmacy["phone-number"]}`} className="underline hover:decoration-2">
-							{pharmacy["phone-number"]}
-						</a>
-					</p>
-				</div>
+				<PharmacyItem pharmacy={pharmacy} />
 			</div>
 		</div>
 	);
