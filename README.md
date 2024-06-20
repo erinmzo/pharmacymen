@@ -6,7 +6,7 @@
 <h1 align="center">
   <img src="https://github.com/erinmzo/pharmacymen/assets/110635641/60b30bda-ed1a-469e-ad58-772fc7825c29" width="23"> 약국 어디 가멘
 </h1>
-
+<br><br>
 <div align="center">국내 대표 여행지인 제주도의 모든 약국을 한눈에 볼 수 있는 웹 사이트</div>
 
 <br><br><br><br>
