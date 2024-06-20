@@ -35,6 +35,7 @@ function LoginForm() {
 							id="userId"
 							value={userId}
 							onChange={(e) => setUserId(e.target.value)}
+							maxLength={40}
 							className="p-[12px] w-[374px] border-2 rounded-md border-green-400"
 						/>
 					</div>
@@ -47,6 +48,7 @@ function LoginForm() {
 							id="userPw"
 							value={userPw}
 							onChange={(e) => setUserPw(e.target.value)}
+							maxLength={40}
 							className="p-[12px] w-[374px] border-2 rounded-md border-green-400"
 						/>
 					</div>
