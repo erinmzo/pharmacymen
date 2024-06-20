@@ -38,7 +38,7 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 							<img src={backIcon} alt="Back Icon" />
 						</button>
 					</div>
-					<div className="mt-20 w-full h-full overflow-y-auto custom-scrollbar">
+					<div className="mt-20 w-full h-full overflow-y-auto custom-scrollbar pb-[100px]">
 						<div className="px-8 py-2 flex items-center">
 							<p className="text-[34px] font-bold text-green-400 inline-block">
 								{pharmacies.length > 0 && pharmacies[0]["place-area"].slice(0, -1)}

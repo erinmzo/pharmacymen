@@ -13,8 +13,8 @@ function ListPage() {
 
 	const {
 		data: menuItems,
-		error,
-		isPending
+		isPending,
+		error
 	} = useQuery({
 		queryKey: ["menuItems", lastFourDigits],
 		queryFn: () => getPharmacies(lastFourDigits)
