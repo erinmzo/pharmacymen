@@ -4,7 +4,7 @@ import PharmacyList from "./PharmacyList";
 import backIcon from "/img/icon_back.png";
 import iconClose from "/img/icon_close.png";
 import iconOpen from "/img/icon_open.png";
-import "./listPageStyle.css";
+import "./ListPageStyle.css";
 
 function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 	const [isToggled, setIsToggled] = useState(true);
@@ -33,7 +33,7 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 				} transition-transform duration-1000 delay-200`}
 			>
 				<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50 ">
-					<div className="w-full px-4 py-7 bg-green-400 text-white flex items-center">
+					<div className="fixed w-full px-4 py-7 bg-green-400 text-white flex items-center z-10">
 						<button onClick={handleBack} className="mr-2">
 							<img src={backIcon} alt="Back Icon" />
 						</button>
