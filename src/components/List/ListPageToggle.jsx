@@ -33,13 +33,13 @@ function ListPageToggle({ menuItems: pharmacies, selectedMarkerId }) {
 					isToggled ? "translate-x-0" : "-translate-x-full"
 				} transition-transform duration-1000 delay-200`}
 			>
-				<div className="w-full overflow-y-auto custom-scrollbar bg-gray-50 ">
+				<div className="w-full bg-gray-50">
 					<div className="fixed w-full px-4 py-7 bg-green-400 text-white flex items-center z-10">
 						<button onClick={handleBack} className="mr-2">
 							<img src={backIcon} alt="Back Icon" />
 						</button>
 					</div>
-					<div className="mt-4">
+					<div className="mt-20 w-full h-full overflow-y-auto custom-scrollbar">
 						<ul>
 							<div className="px-8 py-2 flex items-center h-full">
 								<p className="text-[34px] font-bold text-green-400 inline-block">
